@@ -1,3 +1,4 @@
+from screeninfo import get_monitors
 import pygame as pg
 import random
 
@@ -73,7 +74,7 @@ def draw_help():
     data.append(["↓", "Speed down"])
 
     pg.draw.lines(gameDisplay, (255, 50, 50, 255), True, [
-                      (0, 0), (800, 0), (800, 600), (0, 600)], 5)
+                      (0, 0), (w, 0), (w, h), (0, h)], 5)
     for i, text in enumerate(data):
         gameDisplay.blit(font1.render(
             text[0], True, (128, 128, 255)), (100, 100 + 30*i))
@@ -82,7 +83,8 @@ def draw_help():
 
 
 if __name__ == "__main__":
-    SCREEN_DIM = (800, 600)
+    w, h = get_monitors()[-1].width, get_monitors()[-1].height
+    SCREEN_DIM = w, h
     fps = 60
     pg.init()
     gameDisplay = pg.display.set_mode(SCREEN_DIM)
